@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Eye Disease Detection</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+
+<div class="dark-toggle">
+    <label class="switch">
+        <input type="checkbox" id="darkModeSwitch">
+        <span class="slider round"></span>
+    </label>
+    <p>Dark Mode</p>
+</div>
+
+<div class="container">
+    <h2>Eye Disease Classification System</h2>
+
+    <form id="uploadForm" action="/predict" method="POST" enctype="multipart/form-data">
+
+        <div class="upload-area" id="uploadBox">
+            <p>Click to upload an image</p>
+            <img id="previewImage" class="hidden">
+            <input type="file" name="image" id="imageUpload" accept="image/*">
+        </div>
+
+        <button type="submit" id="submitBtn">Analyze Eye</button>
+
+        <div class="loader hidden" id="loader"></div>
+    </form>
+
+    {% if uploaded_image %}
+    <div class="result-box">
+        <h3>Uploaded Image</h3>
+        <img src="/static/{{ uploaded_image }}" class="preview">
+        
+        <h3>Prediction Result</h3>
+        <p><strong>Disease:</strong> {{ result }}</p>
+        <p><strong>Confidence:</strong> {{ confidence }}%</p>
+        <p><strong>Advice:</strong> {{ advice }}</p>
+    </div>
+    {% endif %}
+</div>
+
+<script src="/static/script.js"></script>
+</body>
+</html>
